@@ -1,3 +1,4 @@
+import 'package:closecallsecommerce/View/Catalog/Catalogmain.dart';
 import 'package:flutter/material.dart';
 
 class Women extends StatefulWidget {
@@ -30,19 +31,23 @@ class _WomenState extends State<Women> {
               ),
             ),
           ),
-          Expanded(flex: 1,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),
-              margin:EdgeInsets.all(5) ,
-              child: Row(children: [
-                Expanded(child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text('New',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),)),
-                Expanded(child: Container(
-                  child: Image.asset('assets/category/new.png'),
-                )),
-              ]),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Catalogmain()));
+            },child: Expanded(flex: 1,
+              child: Container(
+                decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),
+                margin:EdgeInsets.all(5) ,
+                child: Row(children: [
+                  Expanded(child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: Text('New',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),)),
+                  Expanded(child: Container(
+                    child: Image.asset('assets/category/new.png'),
+                  )),
+                ]),
 
+              ),
             ),
           ), Expanded(flex: 1,
             child: Container(

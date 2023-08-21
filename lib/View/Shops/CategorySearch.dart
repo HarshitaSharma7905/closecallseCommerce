@@ -12,7 +12,11 @@ class _CategorySearchState extends State<CategorySearch> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
         title: Text('Categories',style: TextStyle(color: Colors.black),),
         centerTitle: true,
         actions: [Padding(padding: EdgeInsets.all(20),child: Icon(Icons.search,color: Colors.black,),)],

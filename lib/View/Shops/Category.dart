@@ -46,7 +46,7 @@ class _CategoryState extends State<_Category> with SingleTickerProviderStateMixi
         centerTitle: true,
         actions: [Padding(padding: EdgeInsets.all(20),child: GestureDetector(
             onTap: () {
-
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CategorySearch()));
             },
             child: Icon(Icons.search,color: Colors.black,)),)],
         bottom: TabBar(

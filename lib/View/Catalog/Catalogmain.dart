@@ -13,7 +13,9 @@ class _CatalogmainState extends State<Catalogmain> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+        leading: GestureDetector(onTap: () {
+          Navigator.pop(context);
+        },child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
         actions: [Padding(padding: EdgeInsets.all(20),child: Icon(Icons.search,color: Colors.black,),)],
         bottom:PreferredSize(
           preferredSize: Size.fromHeight(180),
