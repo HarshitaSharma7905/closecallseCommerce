@@ -12,7 +12,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.white,
-          leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,))
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios,color: Colors.black,))
       ),
       body: Column(children: [
         Container(

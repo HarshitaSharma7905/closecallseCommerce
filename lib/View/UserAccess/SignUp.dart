@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'Login.dart';
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -78,7 +80,11 @@ class _SignUpState extends State<SignUp> {
                  },child: Row(
                    mainAxisAlignment: MainAxisAlignment.end,
                    children: [
-                     Text('Already have an account? ',style: TextStyle(color: Colors.black),),
+                     GestureDetector(
+                         onTap: () {
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                         },
+                         child: Text('Already have an account? ',style: TextStyle(color: Colors.black),)),
                      Icon(Icons.arrow_right_alt_sharp,color: Colors.red,)
                    ],
                  )),
@@ -88,6 +94,7 @@ class _SignUpState extends State<SignUp> {
                  width: 450,
                  height: 40,
                  child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
 
                  },child: Text('Sign up')),
                )
@@ -107,8 +114,8 @@ class _SignUpState extends State<SignUp> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(width: 100,height: 30,child: Image.network('assets/google.png',scale: 3,)),
-              Container(width: 100,height: 30,child: Image.network('assets/facebook.png',scale: 3,))
+              Container(width: 100,height: 30,child: Image.asset('assets/google.png',scale: 3,)),
+              Container(width: 100,height: 30,child: Image.asset('assets/facebook.png',scale: 3,))
             ],
           )
         ],),

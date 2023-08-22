@@ -1,3 +1,5 @@
+import 'package:closecallsecommerce/View/Main/MainPage.dart';
+import 'package:closecallsecommerce/View/UserAccess/ForgetPassword.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -61,7 +63,11 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text("Don't have account?",style: TextStyle(color: Colors.black),),
-                    Icon(Icons.arrow_right_alt_sharp,color: Colors.red,)
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPassword()));
+                        },
+                        child: Icon(Icons.arrow_right_alt_sharp,color: Colors.red,))
                   ],
                 )),
               ),
@@ -70,7 +76,7 @@ class _LoginState extends State<Login> {
                 width: 450,
                 height: 40,
                 child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
                 },child: Text('Login')),
               )
             ]),
@@ -88,8 +94,8 @@ class _LoginState extends State<Login> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(width: 100,height: 30,child: Image.network('assets/google.png',scale: 3,)),
-              Container(width: 100,height: 30,child: Image.network('assets/facebook.png',scale: 3,))
+              Container(width: 100,height: 30,child: Image.asset('assets/google.png',scale: 3,)),
+              Container(width: 100,height: 30,child: Image.asset('assets/facebook.png',scale: 3,))
             ],
           )
         ],),
