@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dropdown_search: ^2.0.0
 
 
 
@@ -83,6 +84,14 @@ flutter:
      - assets/category/accesories.png
      - assets/catalog1.png
      - assets/rating.png
+     - assets/catalog.png
+     - assets/img2.png
+     - assets/Product/pimg1.png
+     - assets/Product/pimg2.png
+     - assets/Product/Ratingblock.png
+     - assets/Product/column.png
+     - assets/Success/successgirl.png
+     - assets/Success/successbag.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
