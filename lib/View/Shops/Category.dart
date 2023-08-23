@@ -70,6 +70,4 @@ class _CategoryState extends State<_Category> with SingleTickerProviderStateMixi
   }
 }
 
-void main() {
-  runApp(MaterialApp(home: Category()));
-}
+

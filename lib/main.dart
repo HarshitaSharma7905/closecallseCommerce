@@ -17,7 +17,6 @@ import 'package:closecallsecommerce/View/Test.dart';
 import 'package:closecallsecommerce/View/UserAccess/ForgetPassword.dart';
 import 'package:closecallsecommerce/View/UserAccess/Login.dart';
 import 'package:closecallsecommerce/View/UserAccess/SignUp.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'View/MyBag/AddShippingAddress.dart';
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:SuccessCart(),
+      home: MainPage(),
     );
   }
 }
