@@ -7,6 +7,8 @@ import 'package:closecallsecommerce/View/Main/MainPage.dart';
 import 'package:closecallsecommerce/View/MyBag/MyBag.dart';
 import 'package:closecallsecommerce/View/Product/ProductCart.dart';
 import 'package:closecallsecommerce/View/Product/Rating.dart';
+import 'package:closecallsecommerce/View/Profile/Orders/OrderDetails.dart';
+import 'package:closecallsecommerce/View/Profile/Profile.dart';
 import 'package:closecallsecommerce/View/Search/VisualSearch.dart';
 import 'package:closecallsecommerce/View/Search/VisualSearchCrop.dart';
 import 'package:closecallsecommerce/View/Search/VisualSearchTakePhoto.dart';
@@ -21,6 +23,7 @@ import 'package:flutter/material.dart';
 
 import 'View/MyBag/AddShippingAddress.dart';
 import 'View/MyBag/ShippingAddress.dart';
+import 'View/Profile/Orders.dart';
 import 'View/Search/VisualSearchFinding.dart';
 import 'View/Shops/Category.dart';
 
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage(),
+      home: OrderDetails(),
     );
   }
 }

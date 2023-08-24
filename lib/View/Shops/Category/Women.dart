@@ -15,7 +15,8 @@ class _WomenState extends State<Women> {
       margin: EdgeInsets.all(10),
       child: Column(
         children: [
-          Expanded(flex: 1,
+          Expanded(
+            flex: 1,
             child: Container(
               margin:EdgeInsets.all(5) ,
               decoration: BoxDecoration(color: Colors.red,borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -26,12 +27,12 @@ class _WomenState extends State<Women> {
                       Text('SUMMER SALES',
                         style: TextStyle(fontWeight: FontWeight.w500,fontSize: 24,color: Colors.white),),
                       Text('Up to 50% off',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.white),)
-
                     ]),
               ),
             ),
           ),
-          Expanded(flex: 1,
+          Expanded(
+            flex: 1,
             child: GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Catalogmain()));
@@ -44,15 +45,15 @@ class _WomenState extends State<Women> {
                       flex: 1,
                       child: Container(
                         padding: EdgeInsets.all(10),
-                        child: Text('New',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),)),
+                        child: Text('New',
+                          style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),
+                      )),
                   Expanded(
                       flex: 1,
                       child: Container(
                         child: Image.asset('assets/category/new.png'),
                       )),
                 ]),
-
-
               ),
             ),
           ), Expanded(flex: 1,
@@ -71,9 +72,9 @@ class _WomenState extends State<Women> {
                       child: Image.asset('assets/category/cloths.png'),
                     )),
               ]),
-
             ),
-          ), Expanded(flex: 1,
+          ), Expanded(
+            flex: 1,
             child: Container(
               decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),
               margin:EdgeInsets.all(5) ,
@@ -106,7 +107,6 @@ class _WomenState extends State<Women> {
                       child: Image.asset('assets/category/accesories.png'),
                     )),
               ]),
-
             ),
           ),
         ],
