@@ -1,7 +1,10 @@
 
+import 'package:closecallsecommerce/View/Favourite/Favourites.dart';
 import 'package:closecallsecommerce/View/Main/Home.dart';
 import 'package:closecallsecommerce/View/Shops/Category.dart';
 import 'package:flutter/material.dart';
+
+import '../MyBag/MyBag.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -12,7 +15,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int index=0;
-  List screen=[Home(),Category(),Text('Bag'),Text('Favourites'),Text('profile')];
+  List screen=[Home(),Category(),MyBag(),Favourite(),Text('profile')];
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: screen[index],
