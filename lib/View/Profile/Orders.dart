@@ -24,7 +24,11 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
           backgroundColor: Colors.white,
           actions: [Padding(padding: EdgeInsets.all(20),child: Icon(Icons.search,color: Colors.black,),)],
           bottom:PreferredSize(
@@ -49,8 +53,8 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
         controller:_tabController,
         children: [
           Delivered(),
-          Text('Processing'),
-          Text('Cancelled'),
+          Delivered(),
+          Delivered(),
     ]),
 
     );

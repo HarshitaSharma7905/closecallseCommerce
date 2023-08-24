@@ -1,3 +1,4 @@
+import 'package:closecallsecommerce/View/Search/VisualSearchTakePhoto.dart';
 import 'package:flutter/material.dart';
 
 class VisualSearch extends StatefulWidget {
@@ -13,7 +14,11 @@ class _VisualSearchState extends State<VisualSearch> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
           title: Text('Visual search',style: TextStyle(color: Colors.black),),
           centerTitle: true,
       ),
@@ -30,7 +35,7 @@ class _VisualSearchState extends State<VisualSearch> {
             width: 300,
             height: 40,
             child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>VisualSearchTakePhoto()));
             },child: Text('TAKE A PHOTO')),
           )
           ,SizedBox(height: 10,),

@@ -1,3 +1,4 @@
+import 'package:closecallsecommerce/View/MyBag/ShippingAddress.dart';
 import 'package:flutter/material.dart';
 
 class MyBag extends StatefulWidget {
@@ -13,7 +14,10 @@ class _MyBagState extends State<MyBag> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        actions: [Padding(padding: EdgeInsets.all(20),child: Icon(Icons.search,color: Colors.black,),)],
+          leading: GestureDetector(onTap: () {
+
+           Navigator.pop(context);
+          },child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
           bottom:PreferredSize(
             preferredSize: Size.fromHeight(40),
             child: Container(
@@ -55,7 +59,7 @@ class _MyBagState extends State<MyBag> {
                 width: 250,
                 height: 40,
                 child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingAddress(),));
                 },child: Text('CHECK OUT')),
               ),
       ),

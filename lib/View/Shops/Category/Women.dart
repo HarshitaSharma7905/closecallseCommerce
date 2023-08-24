@@ -1,4 +1,5 @@
 import 'package:closecallsecommerce/View/Catalog/Catalogmain.dart';
+import 'package:closecallsecommerce/View/Catalog/Ctalogmain2.dart';
 import 'package:flutter/material.dart';
 
 class Women extends StatefulWidget {
@@ -35,7 +36,7 @@ class _WomenState extends State<Women> {
             flex: 1,
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Catalogmain()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Catalogmain2()));
               },
               child: Container(
                 decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),

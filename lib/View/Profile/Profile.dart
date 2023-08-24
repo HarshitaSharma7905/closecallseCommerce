@@ -1,4 +1,9 @@
+import 'package:closecallsecommerce/View/Product/Rating.dart';
+import 'package:closecallsecommerce/View/Profile/Orders.dart';
+import 'package:closecallsecommerce/View/UserAccess/Setting.dart';
 import 'package:flutter/material.dart';
+
+import '../MyBag/AddShippingAddress.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -44,123 +49,104 @@ class _ProfileState extends State<Profile> {
                   ]),
             ),
             SizedBox(height: 5,),
-            Container(
-            width: 450,color: Colors.white,
-              // height: 200,
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('My orders',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-                      Text('Already have 12 orders',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
-                    ],),
-                  Container(
-                    child: Icon(Icons.arrow_forward_ios),
-                  )
-                ],
+            GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Orders(),));
+            }  ,
+            child: Container(
+              width: 450,color: Colors.white,
+                // height: 200,
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('My orders',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                        Text('Already have 12 orders',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
+                      ],),
+                    Container(
+                      child: Icon(Icons.arrow_forward_ios),
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 5,),
-            Container(
-              width: 450,color: Colors.white,
-              // height: 200,
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Shipping addresses',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-                      Text('3 addresses',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
-                    ],),
-                  Container(
-                    child: Icon(Icons.arrow_forward_ios),
-                  )
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddShippingAddress(),));
+              },
+              child: Container(
+                width: 450,color: Colors.white,
+                // height: 200,
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Shipping addresses',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                        Text('3 addresses',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
+                      ],),
+                    Container(
+                      child: Icon(Icons.arrow_forward_ios),
+                    )
+                  ],
+                ),
               ),
             ) ,
             SizedBox(height: 5,),
-            Container(
-              width: 450,color: Colors.white,
-              // height: 200,
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Payment methods',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-                      Text('Visa  **34',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
-                    ],),
-                  Container(
-                    child: Icon(Icons.arrow_forward_ios),
-                  )
-                ],
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Rating()));
+              },
+              child: Container(
+                width: 450,color: Colors.white,
+                // height: 200,
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('My reviews',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                        Text('Reviews for 4 items',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
+                      ],),
+                    Container(
+                      child: Icon(Icons.arrow_forward_ios),
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 5,),
-            Container(
-              width: 450,color: Colors.white,
-              // height: 200,
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Promocodes',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-                      Text('You have special promocodes',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
-                    ],),
-                  Container(
-                    child: Icon(Icons.arrow_forward_ios),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(height: 5,),
-            Container(
-              width: 450,color: Colors.white,
-              // height: 200,
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('My reviews',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-                      Text('Reviews for 4 items',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
-                    ],),
-                  Container(
-                    child: Icon(Icons.arrow_forward_ios),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(height: 5,),
-            Container(
-              width: 450,color: Colors.white,
-              // height: 200,
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Settings',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-                      Text('Notifications, password',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
-                    ],),
-                  Container(
-                    child: Icon(Icons.arrow_forward_ios),
-                  )
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Setting(),));
+              },
+              child: Container(
+                width: 450,color: Colors.white,
+                // height: 200,
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Settings',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                        Text('Notifications, password',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
+                      ],),
+                    Container(
+                      child: Icon(Icons.arrow_forward_ios),
+                    )
+                  ],
+                ),
               ),
             )
           ],

@@ -16,6 +16,8 @@ class _RatingState extends State<Rating> {
         backgroundColor: Colors.white,
         title: Text('Rating & Reviews',style: TextStyle(color: Colors.black)),centerTitle: true,
         leading: GestureDetector(
+           onTap: () {Navigator.pop(context);
+           },
             child: Icon(Icons.arrow_back_ios,color: Colors.black,)
         ),
         ),

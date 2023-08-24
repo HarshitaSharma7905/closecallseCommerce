@@ -1,4 +1,7 @@
+import 'package:closecallsecommerce/View/Success/SuccessCart.dart';
 import 'package:flutter/material.dart';
+
+import 'AddShippingAddress.dart';
 
 class ShippingAddress extends StatefulWidget {
   const ShippingAddress({Key? key}) : super(key: key);
@@ -28,9 +31,21 @@ class _ShippingAddressState extends State<ShippingAddress> {
       child: Column(children: [
         _shippingWidget("krishna","3 Newbridge Court Chino Hills, CA 91709, United States"),
         SizedBox(height: 15,),
-        _shippingWidget("krishna","3 Newbridge Court Chino Hills, CA 91709, United States")
+        _shippingWidget("krishna","3 Newbridge Court Chino Hills, CA 91709, United States"),
+        SizedBox(height: 20,),
+        Container(
+          width: 450,
+          height: 40,
+          child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>SuccessCart(),));
+          },child: Text('Continue')),
+        )
       ],)),
-      floatingActionButton: Container(width: 40,height: 40,decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.black),child: Icon(Icons.add,color: Colors.white,),),
+      floatingActionButton: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddShippingAddress(),));
+          },
+          child: Container(width: 40,height: 40,decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.black),child: Icon(Icons.add,color: Colors.white,),)),
     );
   }
   Widget _shippingWidget(String name,String address){
@@ -43,7 +58,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
           children: [
           Text(name,style: TextStyle(fontSize: 14,color: Colors.black),),
           TextButton(onPressed: () {
-
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AddShippingAddress(),));
           }, child: Text('Edit',style: TextStyle(color: Colors.red),))
         ],),SizedBox(height: 10,),
         Text(address,style: TextStyle(fontSize: 14,color: Colors.black),),

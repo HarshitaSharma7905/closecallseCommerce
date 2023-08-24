@@ -1,3 +1,4 @@
+import 'package:closecallsecommerce/View/MyBag/MyBag.dart';
 import 'package:flutter/material.dart';
 
 class ProductCart extends StatefulWidget {
@@ -23,6 +24,9 @@ class _ProductCartState extends State<ProductCart> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
             child: Icon(Icons.arrow_back_ios,color: Colors.black,)
         ),actions: [Padding(padding: EdgeInsets.all(20),child: Icon(Icons.share,color: Colors.black,),)],
         title: Text('Short Dresses',style: TextStyle(color: Colors.black),),
@@ -125,7 +129,7 @@ class _ProductCartState extends State<ProductCart> {
                     width: 450,
                     height: 40,
                     child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>MyBag(),));
                     },child: Text('Add To Cart')),
                   )
                 ],

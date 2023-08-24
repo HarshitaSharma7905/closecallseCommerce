@@ -63,8 +63,9 @@ class _CategoryState extends State<_Category> with SingleTickerProviderStateMixi
 
           children: [
             Women(),
-            Text('Men'),
-            Text('Kids')
+            Women(),
+            Women(),
+
           ]),
     );
   }

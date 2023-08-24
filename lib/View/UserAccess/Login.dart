@@ -1,5 +1,6 @@
 import 'package:closecallsecommerce/View/Main/MainPage.dart';
 import 'package:closecallsecommerce/View/UserAccess/ForgetPassword.dart';
+import 'package:closecallsecommerce/View/UserAccess/SignUp.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -13,8 +14,15 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white,
-          leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,))
+      appBar: AppBar(backgroundColor: Colors.black,
+         title: Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+           Icon(Icons.shopping_bag,color: Colors.white,),
+           Text('BULK',style: TextStyle(color: Colors.white),),
+           Text('Me',style: TextStyle(color: Colors.red))
+         ]),
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -54,7 +62,10 @@ class _LoginState extends State<Login> {
                         focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent))
                     )
                 ),
-              ), Container(
+
+              ),
+
+              Container(
                 padding: EdgeInsets.all(10),
                 alignment: Alignment.centerRight,
                 child: TextButton(onPressed:() {
@@ -62,7 +73,7 @@ class _LoginState extends State<Login> {
                 },child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text("Don't have account?",style: TextStyle(color: Colors.black),),
+                  Text("Forgot Password?",style: TextStyle(color: Colors.black)),
                     GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPassword()));
@@ -80,7 +91,10 @@ class _LoginState extends State<Login> {
                 },child: Text('Login')),
               )
             ]),
-          )
+          ),
+          TextButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
+          }, child: Text("Don't have account?",style: TextStyle(color: Colors.black),),),
         ],
       ),
       persistentFooterButtons: [Container(

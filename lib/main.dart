@@ -15,10 +15,11 @@ import 'package:closecallsecommerce/View/Search/VisualSearchTakePhoto.dart';
 import 'package:closecallsecommerce/View/Shops/CategorySearch.dart';
 import 'package:closecallsecommerce/View/Success/Success.dart';
 import 'package:closecallsecommerce/View/Success/SuccessCart.dart';
-import 'package:closecallsecommerce/View/Test.dart';
 import 'package:closecallsecommerce/View/UserAccess/ForgetPassword.dart';
 import 'package:closecallsecommerce/View/UserAccess/Login.dart';
+import 'package:closecallsecommerce/View/UserAccess/Setting.dart';
 import 'package:closecallsecommerce/View/UserAccess/SignUp.dart';
+import 'package:closecallsecommerce/View/Welcome/SplashScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'View/MyBag/AddShippingAddress.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: OrderDetails(),
+      home: SplashScreen(),
     );
   }
 }

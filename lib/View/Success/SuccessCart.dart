@@ -1,3 +1,4 @@
+import 'package:closecallsecommerce/View/Main/MainPage.dart';
 import 'package:flutter/material.dart';
 
 class SuccessCart extends StatefulWidget {
@@ -44,7 +45,7 @@ class _SuccessCartState extends State<SuccessCart> {
                 width: 250,
                 height: 40,
                 child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-
+                Navigator.push(context,MaterialPageRoute(builder: (context) => MainPage(),));
                 },child: Text('Continue Shopping')),
               )
             ]),

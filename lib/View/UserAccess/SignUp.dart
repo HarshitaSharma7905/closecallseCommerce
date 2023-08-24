@@ -12,7 +12,11 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white,leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,))
+      appBar: AppBar(backgroundColor: Colors.white,leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back_ios,color: Colors.black,))
       ),
       body: Container(
 
@@ -77,16 +81,17 @@ class _SignUpState extends State<SignUp> {
                  alignment: Alignment.centerRight,
                  child: TextButton(onPressed:() {
 
-                 },child: Row(
-                   mainAxisAlignment: MainAxisAlignment.end,
-                   children: [
-                     GestureDetector(
-                         onTap: () {
-                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
-                         },
-                         child: Text('Already have an account? ',style: TextStyle(color: Colors.black),)),
-                     Icon(Icons.arrow_right_alt_sharp,color: Colors.red,)
-                   ],
+                 },child: GestureDetector(
+                   onTap: () {
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                   },
+                   child: Row(
+                     mainAxisAlignment: MainAxisAlignment.end,
+                     children: [
+                       Text('Already have an account? ',style: TextStyle(color: Colors.black),),
+                       Icon(Icons.arrow_right_alt_sharp,color: Colors.red,)
+                     ],
+                   ),
                  )),
                ),
                SizedBox(height: 10,),

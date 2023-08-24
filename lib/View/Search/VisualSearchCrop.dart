@@ -1,3 +1,4 @@
+import 'package:closecallsecommerce/View/Search/VisualSearchFinding.dart';
 import 'package:flutter/material.dart';
 class VisualSearchCrop extends StatefulWidget {
   const VisualSearchCrop({Key? key}) : super(key: key);
@@ -12,7 +13,11 @@ class _VisualSearchCropState extends State<VisualSearchCrop> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
         title: Text('Crop the item',style: TextStyle(color: Colors.black),),
         centerTitle: true,
       ),
@@ -27,9 +32,14 @@ class _VisualSearchCropState extends State<VisualSearchCrop> {
         Container(
           alignment: Alignment.center,
           height: 80,
-          child:  Container(height: 50,width: 50,
-            decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
-            child: Icon(Icons.search,color: Colors.white),
+          child:  GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>VisualSearchFinding()));
+            },
+            child: Container(height: 50,width: 50,
+              decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
+              child: Icon(Icons.search,color: Colors.white),
+            ),
           ),)
       ],
     );
