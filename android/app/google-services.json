@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "665142353651",
+    "project_id": "bulkme-a2892",
+    "storage_bucket": "bulkme-a2892.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665142353651:android:20c827021b5e5056656186",
+        "android_client_info": {
+          "package_name": "in.closecalls.closecallsecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665142353651-tu7jjcd3jo2te49t4d78qsi5ke5ulg9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI2iuPiPJWOqpG1PP1S89crMfrsJ5bnNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665142353651-tu7jjcd3jo2te49t4d78qsi5ke5ulg9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

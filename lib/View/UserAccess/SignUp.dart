@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'Login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -9,6 +11,11 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool _button=false;
+  TextEditingController nameController= TextEditingController();
+  TextEditingController emailController= TextEditingController();
+  TextEditingController passwordController= TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +45,7 @@ class _SignUpState extends State<SignUp> {
                  color: Colors.white,
                  padding: EdgeInsets.all(5),
                  child: TextField(
+                     controller:nameController ,
                      style: TextStyle(fontSize: 14),
                      decoration: InputDecoration(label:Text('Name'),
                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
@@ -53,6 +61,7 @@ class _SignUpState extends State<SignUp> {
                  color: Colors.white,
                  padding: EdgeInsets.all(5),
                  child: TextField(
+                   controller: emailController,
                      style: TextStyle(fontSize: 14),
                      decoration: InputDecoration(label:Text('Email'),
                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
@@ -68,6 +77,7 @@ class _SignUpState extends State<SignUp> {
                  color: Colors.white,
                  padding: EdgeInsets.all(5),
                  child: TextField(
+                   controller: passwordController,
                      style: TextStyle(fontSize: 14),
                      decoration: InputDecoration(label:Text('Password'),
                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
@@ -98,10 +108,59 @@ class _SignUpState extends State<SignUp> {
                Container(
                  width: 450,
                  height: 40,
-                 child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                 child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed:_button?null: () async {
+                   setState(() {
+                     _button=true;
+                   });
+                   String name=nameController.text.toString();
+                   String email=emailController.text.toString();
+                   String password=passwordController.text.toString();
 
-                 },child: Text('Sign up')),
+                   if(name==''||email==''||password=='')
+                     {
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                         content: Text("Enter Valid Detail "),
+                       ));
+                     }else
+                     try{
+                       UserCredential userCredential= await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+                       if(userCredential!=null){
+
+                         // Get the newly registered user's UID
+                         String? uid = userCredential.user?.uid;
+                        await FirebaseFirestore.instance.collection('users').doc(uid).set({
+                          'name': name,
+                          'email': email,
+                        });
+
+
+
+                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                           content: Text("Account Created Successfully"),
+                         ));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => Login(),));
+                       }
+                     }catch(error){
+                       String errorMessage = "An error occurred";
+                       if (error is FirebaseAuthException) {
+                         if (error.code == 'weak-password') {
+                           errorMessage = "Password is too weak";
+                         } else if (error.code == 'email-already-in-use') {
+                           errorMessage = "Email is already in use";
+                         } else {
+                           errorMessage = error.message ?? errorMessage;
+                         }
+                       }
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                         content: Text(errorMessage),
+                       ));
+
+                     }
+
+                     {
+
+                   }
+                 },child: _button?CircularProgressIndicator(color: Colors.white,):Text('Sign up')),
                )
              ],),
            )
