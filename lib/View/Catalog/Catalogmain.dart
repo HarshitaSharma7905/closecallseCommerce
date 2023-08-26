@@ -1,3 +1,5 @@
+import 'package:closecallsecommerce/View/Catalog/Filter.dart';
+import 'package:closecallsecommerce/View/Catalog/FilterList.dart';
 import 'package:flutter/material.dart';
 
 class Catalogmain extends StatefulWidget {
@@ -78,12 +80,17 @@ class _CatalogmainState extends State<Catalogmain> {
                           onPressed: () {
                             // Handle button press
                           },
-                          child: Row( // Use Row to create a row of icon and text
-                            children: [
-                              Icon(Icons.filter_list_outlined,color: Colors.black,), // Add the icon
-                              SizedBox(width: 5), // Add spacing between icon and text
-                              Text('Filters',style: TextStyle(color: Colors.black,fontSize: 11),), // Add the text
-                            ],
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: ((context) => Filter())));
+                            },
+                            child: Row( // Use Row to create a row of icon and text
+                              children: [
+                                Icon(Icons.filter_list_outlined,color: Colors.black,), // Add the icon
+                                SizedBox(width: 5), // Add spacing between icon and text
+                                Text('Filters',style: TextStyle(color: Colors.black,fontSize: 11),), // Add the text
+                              ],
+                            ),
                           ),
                         ),
                         TextButton(
@@ -100,7 +107,11 @@ class _CatalogmainState extends State<Catalogmain> {
                             ],
                           ),
                         ),
-                        Icon(Icons.widgets)
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => FilterList(),));
+                            },
+                            child: Icon(Icons.menu))
 
                       ]),
                 )

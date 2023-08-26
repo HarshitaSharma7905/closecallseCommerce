@@ -1,4 +1,9 @@
+import 'package:closecallsecommerce/View/Catalog/Ctalogmain2.dart';
+import 'package:closecallsecommerce/View/Search/VisualSearch.dart';
+import 'package:closecallsecommerce/View/Search/VisualSearchFinding.dart';
 import 'package:flutter/material.dart';
+
+import '../Catalog/Catalogmain.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,7 +35,7 @@ class _HomeState extends State<Home> {
                         width: 200,
                         height: 40,
                         child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=>VisualSearch()));
                         },child: Text('Check')),
                       )
                 ]),
@@ -54,7 +59,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             TextButton(onPressed: () {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Catalogmain()));
             }, child: Text('View All',style: TextStyle(color: Colors.black,fontSize:11),))
           ],)),
           Container(
@@ -126,7 +131,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   TextButton(onPressed: () {
-
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Catalogmain()));
                   }, child: Text('View All',style: TextStyle(color: Colors.black,fontSize:11),))
                 ],)),
           Container(
@@ -182,7 +187,7 @@ class _HomeState extends State<Home> {
             ]) ,
           ),
           Container(
-            height: 380,
+            height: 370,
             child: Row(
               children: [
 

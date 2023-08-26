@@ -1,6 +1,8 @@
 import 'package:closecallsecommerce/View/Main/MainPage.dart';
 import 'package:closecallsecommerce/View/UserAccess/ForgetPassword.dart';
+import 'package:closecallsecommerce/View/UserAccess/SignUp.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -10,11 +12,18 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.white,
-          leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,))
+         title: Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+
+         ]),
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -34,6 +43,7 @@ class _LoginState extends State<Login> {
                 color: Colors.white,
                 padding: EdgeInsets.all(5),
                 child: TextField(
+                  controller: emailController,
                     style: TextStyle(fontSize: 14),
                     decoration: InputDecoration(label:Text('Email'),
                         enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
@@ -48,13 +58,17 @@ class _LoginState extends State<Login> {
                 color: Colors.white,
                 padding: EdgeInsets.all(5),
                 child: TextField(
+                  controller: passwordController,
                     style: TextStyle(fontSize: 14),
                     decoration: InputDecoration(label:Text('Password'),
                         enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
                         focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent))
                     )
                 ),
-              ), Container(
+
+              ),
+
+              Container(
                 padding: EdgeInsets.all(10),
                 alignment: Alignment.centerRight,
                 child: TextButton(onPressed:() {
@@ -62,7 +76,7 @@ class _LoginState extends State<Login> {
                 },child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text("Don't have account?",style: TextStyle(color: Colors.black),),
+                  Text("Forgot Password?",style: TextStyle(color: Colors.black)),
                     GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPassword()));
@@ -75,12 +89,46 @@ class _LoginState extends State<Login> {
               Container(
                 width: 450,
                 height: 40,
-                child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
+                child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () async {
+                  String email =emailController.text.trim();
+                  String password = passwordController.text.trim();
+                  if(email==''||password==''){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Enter Valid Detail "),
+                    ));
+                  }else{
+                    try{
+                      UserCredential usercredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+                      if(usercredential !=null){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(),));
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("User doesnt exist"),
+                        ));
+                      }
+                    }catch(error){
+                      String errorMessage = "An error occurred";
+                      if (error is FirebaseAuthException) {
+                        if (error.code == 'user-not-found') {
+                          errorMessage = "User doesn't exist";
+                        } else if (error.code == 'wrong-password') {
+                          errorMessage = "Incorrect password";
+                        }
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(errorMessage)),
+                      );
+                    }
+
+                  }
+
                 },child: Text('Login')),
               )
             ]),
-          )
+          ),
+          TextButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
+          }, child: Text("Don't have account?",style: TextStyle(color: Colors.black),),),
         ],
       ),
       persistentFooterButtons: [Container(

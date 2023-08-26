@@ -1,4 +1,4 @@
-import 'package:dropdown_search/dropdown_search.dart';
+import 'package:closecallsecommerce/View/Product/ProductCart.dart';
 import 'package:flutter/material.dart';
 
 class Catalogmain2 extends StatefulWidget {
@@ -125,38 +125,51 @@ class _Catalogmain2State extends State<Catalogmain2> {
                 ]
             ),)
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              child: Row(
-                children: [
-                Container(
-                  child: Image.asset('assets/catalog.png'),
+      body: GestureDetector(
+        onTap: () {
+         setState(() {
+           _bool=false;
+           _boolSize=false;
+         });
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCart(),));
+                },
+                child: Container(
+                  child: Row(
+                    children: [
+                    Container(
+                      child: Image.asset('assets/catalog.png'),
+                    ),
+                      Expanded(
+                        child: Container(
+                          child: Image.asset('assets/img2.png'),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
+              ),
+              Container(child: Row(
+                children: [
+                  Container(
+                    child: Image.asset('assets/catalog.png'),
+                  ),
                   Expanded(
                     child: Container(
                       child: Image.asset('assets/img2.png'),
                     ),
                   )
                 ],
-              ),
-            ),
-            Container(child: Row(
-              children: [
-                Container(
-                  child: Image.asset('assets/catalog.png'),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Image.asset('assets/img2.png'),
-                  ),
-                )
-              ],
-            ),),
+              ),),
 
-          ],
+            ],
 
+          ),
         ),
       ),
       bottomSheet:  Container(

@@ -30,8 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dropdown_search: ^2.0.0
-
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.8.0
+  cloud_firestore: ^4.9.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -96,7 +97,15 @@ flutter:
      - assets/Product/column.png
      - assets/Success/successgirl.png
      - assets/Success/successbag.png
+<<<<<<< HEAD
 >>>>>>> cb377068e90fbbfcf1fe61fb375080318fea6ca4
+=======
+     - assets/Profile/profileimg.png
+     - assets/OrdersDetails/detail.png
+     - assets/OrdersDetails/detail2.png
+     - assets/OrdersDetails/detail3.png
+     - assets/logo.jpeg
+>>>>>>> 2be66a9d3162470b29a28a8111811bd190015d48
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -9,6 +9,13 @@ class VisualSearchFinding extends StatefulWidget {
 
 class _VisualSearchFindingState extends State<VisualSearchFinding> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    backscreen();
+
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
      body: Column(
@@ -24,5 +31,11 @@ class _VisualSearchFindingState extends State<VisualSearchFinding> {
          child: Text('Finding similar results...',textAlign: TextAlign.center,style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold,))),
      ]),
     );
+  }
+  Future<void> backscreen() async{
+    await Future.delayed(Duration(seconds: 5));
+    Navigator.pop(context);
+
+
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Ctalogmain2.dart';
+
 class Filter extends StatefulWidget {
   const Filter({Key? key}) : super(key: key);
 
@@ -18,7 +20,11 @@ class _FilterState extends State<Filter> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: GestureDetector(child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
         title: Text('Filters',style: TextStyle(color: Colors.black),),
         centerTitle: true,
               ),
@@ -248,14 +254,14 @@ class _FilterState extends State<Filter> {
               width: 100,
               height: 40,
               child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.transparent) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(side: BorderSide(color: Colors.white),borderRadius: BorderRadius.circular(30)))),onPressed: () {
-
+                Navigator.pop(context);
               },child: Text('DISCARD',style: TextStyle(color: Colors.black),)),
             ),
             Container(
               width: 100,
               height: 40,
               child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(side: BorderSide(color: Colors.white),borderRadius: BorderRadius.circular(30)))),onPressed: () {
-
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => Catalogmain2()));
               },child: Text('APPLY')),
             )
           ]),
