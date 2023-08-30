@@ -1,6 +1,9 @@
+import 'package:closecallsecommerce/View/Shops/Category/Men.dart';
 import 'package:closecallsecommerce/View/Shops/Category/Women.dart';
+import 'package:closecallsecommerce/View/Shops/Category/kid.dart';
 import 'package:closecallsecommerce/View/Shops/CategorySearch.dart';
 import 'package:flutter/material.dart';
+
 
 class Category extends StatelessWidget {
   const Category({Key? key}) : super(key: key);
@@ -63,8 +66,8 @@ class _CategoryState extends State<_Category> with SingleTickerProviderStateMixi
 
           children: [
             Women(),
-            Women(),
-            Women(),
+            Men(),
+            Kid(),
 
           ]),
     );

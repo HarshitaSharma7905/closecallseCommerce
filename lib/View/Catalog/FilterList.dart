@@ -72,7 +72,7 @@ class _FilterListState extends State<FilterList> {
                   width: 100,
                   height: 40,
                   child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(side: BorderSide(color: Colors.white),borderRadius: BorderRadius.circular(30)))),onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Catalogmain2()));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Catalogmain2()));
                   },child: Text('APPLY')),
                 )
               ]),

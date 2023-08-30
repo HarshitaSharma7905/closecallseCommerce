@@ -1,5 +1,7 @@
-import 'package:closecallsecommerce/View/Catalog/Catalogmain.dart';
+import 'dart:html';
+
 import 'package:closecallsecommerce/View/Catalog/Ctalogmain2.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Women extends StatefulWidget {
@@ -12,106 +14,46 @@ class Women extends StatefulWidget {
 class _WomenState extends State<Women> {
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      margin: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              margin:EdgeInsets.all(5) ,
-              decoration: BoxDecoration(color: Colors.red,borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('SUMMER SALES',
-                        style: TextStyle(fontWeight: FontWeight.w500,fontSize: 24,color: Colors.white),),
-                      Text('Up to 50% off',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.white),)
-                    ]),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Catalogmain2()));
-              },
-              child: Container(
-                decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),
-                margin:EdgeInsets.all(5) ,
-                child: Row(children: [
-                  Expanded(
-                      flex: 1,
+    return StreamBuilder<QuerySnapshot>(
+            stream:FirebaseFirestore.instance.collection('women').snapshots(),
+            builder: (context,snapshot){
+              if(snapshot.hasData){
+                List<DocumentSnapshot> documents = snapshot.data!.docs;
+                return ListView.builder(
+                  itemCount: documents.length,
+                  itemBuilder:(context, index) {
+                    Map<String,dynamic> data=documents[index].data() as Map<String,dynamic>;
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder:  (context) => Catalogmain2(collection1: 'women',uid: documents[index].id,collection2: 'product',)));
+                      },
                       child: Container(
-                        padding: EdgeInsets.all(10),
-                        child: Text('New',
-                          style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),
-                      )),
-                  Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Image.asset('assets/category/new.png'),
-                      )),
-                ]),
-              ),
-            ),
-          ), Expanded(flex: 1,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),
-              margin:EdgeInsets.all(5) ,
-              child: Row(children: [
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text('Cloths',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),)),
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: Image.asset('assets/category/cloths.png'),
-                    )),
-              ]),
-            ),
-          ), Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),
-              margin:EdgeInsets.all(5) ,
-              child: Row(children: [
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text('Shoes',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),)),
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: Image.asset('assets/category/shoes.png'),
-                    )),
-              ]),
-            ),
-          ), Expanded(flex: 1,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),
-              margin:EdgeInsets.all(5) ,
-              child: Row(children: [
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text('Accesories',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),)),
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: Image.asset('assets/category/accesories.png'),
-                    )),
-              ]),
-            ),
-          ),
-        ],
-      ),
-    );
+                        height: 100,
+                        decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10))),
+                        margin:EdgeInsets.all(5) ,
+                        child: Row(children: [
+                          Expanded(
+                              flex: 1,
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                data['title'],
+                                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),
+                              )),
+                          Expanded(
+                              flex: 1,
+                              child: Container(
+                                child: Image.network(data['imageurl']),
+                              )),
+                        ]),
+                      ),
+                    );
+                  },
+                );
+              }else{
+                return Center(child: CircularProgressIndicator());
+              }
+            }
+          );
   }
 }

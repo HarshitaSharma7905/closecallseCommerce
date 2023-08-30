@@ -4,6 +4,7 @@ import 'package:closecallsecommerce/View/Search/VisualSearchFinding.dart';
 import 'package:flutter/material.dart';
 
 import '../Catalog/Catalogmain.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,6 +14,31 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late String img1,img2,img3,img4,img5;
+  Future<void> fetchimage() async{
+
+  try{
+    DocumentSnapshot  documentSnapshot=await FirebaseFirestore.instance.collection('mainpage').doc('HFmLKrieReWpa9Hmx15L').get();
+    if(documentSnapshot.exists){
+      Map<String,dynamic>   images =documentSnapshot.data() as Map<String,dynamic>;
+       setState(() {
+         img1= images['img1'];
+        img2= images['img2'];
+        img3= images['img3'];
+        img4= images['img4'];
+        img5= images['img5'];
+       });
+    }
+  }catch(err){
+
+  }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchimage();
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,7 +46,7 @@ class _HomeState extends State<Home> {
         children: [
           Container(
             height: 450,
-            decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/mainpage1.png'),fit: BoxFit.cover),
+            decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(img1),fit: BoxFit.cover),
             ),
             child:Stack(children: [
               Positioned.fill(child:Container(
@@ -29,7 +55,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                       Text('Fashion',style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),),
+                      Text('Fashion',style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),),
                   Text('Sale',style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),),
                       Container(
                         width: 200,
@@ -92,18 +118,16 @@ class _HomeState extends State<Home> {
                     decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/cart1.png'),fit: BoxFit.cover),
                     ),
                   ),
-
                 ],
                 ))
               ],
-
             ),
           ),
         //  main page 2
           Container(
             height: 190,
             margin: EdgeInsets.only(top: 15),
-            decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/smallbaner.png'),fit: BoxFit.cover),
+            decoration: BoxDecoration(image: DecorationImage(image:NetworkImage(img2),fit: BoxFit.cover),
             ),
             child:Stack(children: [
               Positioned.fill(child:Container(
@@ -176,7 +200,7 @@ class _HomeState extends State<Home> {
           Container(
             height: 350,
             margin: EdgeInsets.only(top: 15),
-            decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/main3.png'),fit: BoxFit.cover),
+            decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(img3),fit: BoxFit.cover),
             ),
             child:Stack(children: [
               Positioned.fill(child:Container(
@@ -204,14 +228,14 @@ class _HomeState extends State<Home> {
                          alignment: Alignment.center, )),
                       Expanded(
                           child: Container(
-                            child: Image.asset('assets/main3girl.png'),
+                            child: Image.network(img4),
                           )),
                     ],
                   ),
                 )),
                 Expanded(
                     child: Container(
-                      child: Image.asset('assets/main3men.png'),
+                      child: Image.network(img5),
                     )),
               ],
             ),

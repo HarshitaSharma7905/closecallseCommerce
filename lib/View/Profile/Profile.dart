@@ -1,9 +1,11 @@
 import 'package:closecallsecommerce/View/Product/Rating.dart';
 import 'package:closecallsecommerce/View/Profile/Orders.dart';
+import 'package:closecallsecommerce/View/UserAccess/Login.dart';
 import 'package:closecallsecommerce/View/UserAccess/Setting.dart';
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../MyBag/AddShippingAddress.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -13,6 +15,32 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  late String uid;
+  late Map<String,dynamic> data={};
+  late SharedPreferences prefs;
+
+  Future<void> userDetail() async{
+     prefs=await SharedPreferences.getInstance();
+    //  To retrieve the data----------
+    setState(() {
+      uid=prefs.getString('uid')!;
+    });
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    if (documentSnapshot.exists) {
+      Map<String, dynamic> fdata = documentSnapshot.data() as Map<String, dynamic>;
+     setState(() {
+       data=fdata;
+     });
+    } else {
+      print('Document does not exist');
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userDetail();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +70,8 @@ class _ProfileState extends State<Profile> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Matilda Brown',style: TextStyle(fontSize:18,fontWeight: FontWeight.bold)),
-                    Text('matildabrown@mail.com',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.grey),)
+                    Text(data['name'].toString(),style: TextStyle(fontSize:18,fontWeight: FontWeight.bold)),
+                    Text(data['email'].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.grey),)
                   ],
                 ),
                   ]),
@@ -141,6 +169,32 @@ class _ProfileState extends State<Profile> {
                       children: [
                         Text('Settings',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
                         Text('Notifications, password',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),)
+                      ],),
+                    Container(
+                      child: Icon(Icons.arrow_forward_ios),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                prefs.setBool('isLoggedIn',false);
+                prefs.remove('uid');
+                Navigator.push(context, MaterialPageRoute(builder: ((context) => Login())));
+              },
+              child: Container(
+                width: 450,color: Colors.white,
+                // height: 200,
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Logout',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                        Text('To handle your Account Safely',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 11,color: Colors.grey ),),
                       ],),
                     Container(
                       child: Icon(Icons.arrow_forward_ios),

@@ -3,6 +3,7 @@ import 'package:closecallsecommerce/View/UserAccess/ForgetPassword.dart';
 import 'package:closecallsecommerce/View/UserAccess/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -14,6 +15,18 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  late SharedPreferences prefs;
+  @override
+  void initState() {
+    super.initState();
+    _getSharedPreferences();
+  }
+
+  _getSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    // Do something with prefs if needed
+    bool? isLoggedIn=prefs.getBool('isLoggedIn');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,6 +113,11 @@ class _LoginState extends State<Login> {
                     try{
                       UserCredential usercredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
                       if(usercredential !=null){
+                        print(usercredential);
+                        String? uid = usercredential.user?.uid;
+                        //to store data locally----
+                        prefs.setString('uid', uid!);
+                        prefs.setBool('isLoggedIn', true);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(),));
                       }else{
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
