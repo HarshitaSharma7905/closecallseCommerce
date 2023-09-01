@@ -1,8 +1,17 @@
+import 'dart:html';
+
 import 'package:closecallsecommerce/View/MyBag/MyBag.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductCart extends StatefulWidget {
-  const ProductCart({Key? key}) : super(key: key);
+  final String collection1;
+  final String collection2;
+  final String uid1;
+  final String uid2;
+  final String title;
+  const ProductCart({Key? key, required this.collection1, required this.collection2, required this.uid1, required this.uid2, required this.title}) : super(key: key);
 
   @override
   State<ProductCart> createState() => _ProductCartState();
@@ -14,6 +23,7 @@ class _ProductCartState extends State<ProductCart> {
   bool _bool=false;
   int selectedSizeIndex=-1;
   List<String> sizes=['XS','S','M','L','XL','XXL'];
+  String size ="Select Size";
 
   String _selectedItem = 'Colors';
   List<String> _dropdownItems = ['Blue', 'Red', 'Green','Pink'];
@@ -29,7 +39,7 @@ class _ProductCartState extends State<ProductCart> {
           },
             child: Icon(Icons.arrow_back_ios,color: Colors.black,)
         ),actions: [Padding(padding: EdgeInsets.all(20),child: Icon(Icons.share,color: Colors.black,),)],
-        title: Text('Short Dresses',style: TextStyle(color: Colors.black),),
+        title: Text(widget.title,style: TextStyle(color: Colors.black),),
         centerTitle: true,),
     body:GestureDetector(
       onTap: () {
@@ -39,104 +49,130 @@ class _ProductCartState extends State<ProductCart> {
         });
       },
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 375,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Image.asset('assets/Product/pimg1.png'),
-                  Image.asset('assets/Product/pimg2.png'),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
+        child: FutureBuilder<DocumentSnapshot>(
+          future: FirebaseFirestore.instance.collection(widget.collection1).doc(widget.uid1).collection(widget.collection2).doc(widget.uid2).get(),
+          builder: (context, snapshot) {
+           Map<String,dynamic> document= snapshot.data?.data() as Map<String,dynamic>;
+           return Column(
+             children: [
+               Container(
+                 height: 375,
+                 child: ListView(
+                   scrollDirection: Axis.horizontal,
+                   children: [
+                     Image.network(document['image']),
+                     Image.network(document['image']),
+                   ],
+                 ),
+               ),
+               Container(
+                 padding: EdgeInsets.all(10),
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                   children: [
+                     Expanded(
+                       child: Container(
 
-                      width: 138,height: 40,
-                      child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.white)),onPressed: () {
-                       setState(() {
-                         _boolSize=true;
-                       });
-                  },child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Size',style: TextStyle(color: Colors.black,fontSize: 14)),
-                      Icon(Icons.arrow_drop_down,color: Colors.black,)
-                    ],
-                  ),)),SizedBox(width: 10,),
-                  Container(
-                      width: 138,height: 40,
-                      child:  ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),child: Center(
-                        child: DropdownButton<String>(
-                          padding: EdgeInsets.all(10),
-                          style: TextStyle(
-                              backgroundColor: Colors.white // Remove underline decoration
-                          ),
-                          hint: Text(_selectedItem),
-                          items: _dropdownItems.map((String item) {
-                            return DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(item),
+                           width: 138,height: 40,
+                           child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.white)),onPressed: () {
+                             setState(() {
+                               _boolSize=true;
+                             });
+                           },child:
+                               Container(
+                                   width: 345,
+                                   child: Text(size,style: TextStyle(color: Colors.black,fontSize: 14))),
 
-                            );
-                          }).toList(),
+                            )),
+                     ),SizedBox(width: 10,),
+                     Expanded(
+                       child: Container(
+                           width: 138,height: 40,
+                           child:  ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),child: Center(
+                             child: DropdownButton<String>(
+                               padding: EdgeInsets.all(10),
+                               style: TextStyle(
+                                   backgroundColor: Colors.white // Remove underline decoration
+                               ),
+                               hint: Text(_selectedItem),
+                               items: _dropdownItems.map((String item) {
+                                 return DropdownMenuItem<String>(
+                                   value: item,
+                                   child: Text(item),
 
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedItem=value.toString();
-                            });
-                          },),
-                      ),onPressed: () {
+                                 );
+                               }).toList(),
 
-                      },)),
-                  Container(
-                    height: 40,width: 40,
-                    child: GestureDetector(
-                        onTap: () {
-                     setState(() {
-                       _boolfav=true;
-                     });
-                        },
-                        child: Icon(Icons.favorite_border_outlined)),
-                  )
+                               onChanged: (value) {
+                                 setState(() {
+                                   _selectedItem=value.toString();
+                                 });
+                               },),
+                           ),onPressed: () {
 
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('H&M',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24)),
-                      Text('₹19.99',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),)
-                    ],
-                  ),
-                  Text('Short black dress',style: TextStyle(color: Colors.grey,fontSize: 11),),
-                  Image.asset('assets/rating.png'),SizedBox(height: 10,),
-                  Text('Short dress in soft cotton jersey with decorative buttons down the front and a wide, frill-trimmed square neckline with concealed elastication. Elasticated seam under the bust and short puff sleeves with a small frill trim.',
-                  style: TextStyle(fontSize: 14,color: Colors.black),),SizedBox(height: 15,),
-                  Container(
-                    width: 450,
-                    height: 40,
-                    child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>MyBag(),));
-                    },child: Text('Add To Cart')),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+                           },)),
+                     ),
+                     Container(
+                       height: 40,width: 40,
+                       child: GestureDetector(
+                           onTap: () {
+                             setState(() {
+                               _boolfav=true;
+                             });
+                           },
+                           child: Icon(Icons.favorite_border_outlined)),
+                     )
+
+                   ],
+                 ),
+               ),
+               Container(
+                 padding: EdgeInsets.all(15),
+                 child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     Column(
+                       mainAxisAlignment: MainAxisAlignment.start,
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         Text(document['title'],maxLines: 3,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24)),
+                         Text('₹'+document['price'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),)
+                       ],
+                     ),
+                     Text('Short black dress',style: TextStyle(color: Colors.grey,fontSize: 11),),
+                     Image.asset('assets/rating.png'),SizedBox(height: 10,),
+                     Text(document['description'],
+                       style: TextStyle(fontSize: 14,color: Colors.black),),SizedBox(height: 15,),
+                     Container(
+                       width: 450,
+                       height: 40,
+                       child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () async{
+                        SharedPreferences prefer=await SharedPreferences.getInstance();
+                         String? customerUdi=prefer.getString('uid');
+                         String col1=widget.collection1;
+                         String id1=widget.uid1;
+                         String col2=widget.collection2;
+                         String productId=snapshot.data!.id;
+                         String productSize=size;
+                         String productColor=_selectedItem;
+                         
+                         await FirebaseFirestore.instance.
+                         collection('customer').doc(customerUdi).collection('cart').
+                         add({"col1":col1,'col2':col2,'id1':id1,'productId':productId,'productSize':productSize,'productColor':productColor}).whenComplete(() => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                           content: Text("Added to cart successfully "),
+                         )));
+                         
+
+                         // Navigator.push(context, MaterialPageRoute(builder: (context) =>MyBag(),));
+                       },child: Text('Add To Cart')),
+                     )
+                   ],
+                 ),
+               )
+             ],
+           );
+          },
+        )
       ),
     ),bottomSheet: Container(
       height: 300,
@@ -231,8 +267,11 @@ class _ProductCartState extends State<ProductCart> {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Center(child:ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all(color)),onPressed: () {
           setState(() {
-            selectedIndex = index;
+            selectedSizeIndex = index;
+            size=sizes[selectedSizeIndex];
+
             _bool = false;
+
           });
 
         },child:  Text(label,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: textColor),)),

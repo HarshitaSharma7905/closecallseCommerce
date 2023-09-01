@@ -35,7 +35,6 @@ class _CategoryState extends State<_Category> with SingleTickerProviderStateMixi
     _tabController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

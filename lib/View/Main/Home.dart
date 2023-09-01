@@ -92,32 +92,53 @@ class _HomeState extends State<Home> {
             width: 450,height: 250,
             child: Row(
               children: [
-                Expanded(child: ListView(scrollDirection: Axis.horizontal,
+                Expanded(child: ListView(
+                  scrollDirection: Axis.horizontal,
                 children: [
-                  Container(
-                    width: 150,
-                    height: 250,
-                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/cart1.png'),fit: BoxFit.cover),
-                    ),
+                  StreamBuilder<QuerySnapshot> (
+                    stream: FirebaseFirestore.instance.collection('new').snapshots(),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData){
+                        List<DocumentSnapshot> document=snapshot.data!.docs;
+                        return Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: List.generate(document.length, (index) {
+                            Map<String, dynamic> data = document[index].data() as Map<String, dynamic>;
+
+                            String title = data['title'];
+                            int maxCharacters = 10; // Show the first 10 characters
+
+                            String shortenedTitle = title.length > maxCharacters
+                                ? title.substring(0, maxCharacters)
+                                : title;
+
+                            return Container(
+                              padding: EdgeInsets.all(10),
+                              height: 300,
+                              width: 160,
+
+                              child: Column(
+                                children: [
+                                  Image.network(data['image'], scale: 5,),SizedBox(height: 5,),
+                                  Text(data['category'],style: TextStyle(fontSize: 14,color: Colors.grey),),SizedBox(height: 5,),
+                                  Text(shortenedTitle, style: TextStyle(fontSize: 18, color: Colors.black)),SizedBox(height: 5,),
+                                  Image.asset('assets/rating.png'),SizedBox(height: 5,),
+                                  Text('₹'+data['price'],style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold),)
+
+                                ],
+                              ),
+                            );
+                          }),
+                        );
+
+
+                      }else{
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
                   ),
-                  Container(
-                    width: 150,
-                    height: 250,
-                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/cart1.png'),fit: BoxFit.cover),
-                    ),
-                  ),
-                  Container(
-                    width: 150,
-                    height: 250,
-                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/cart1.png'),fit: BoxFit.cover),
-                    ),
-                  ),
-                  Container(
-                    width: 150,
-                    height: 250,
-                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/cart1.png'),fit: BoxFit.cover),
-                    ),
-                  ),
+
                 ],
                 ))
               ],
@@ -162,35 +183,55 @@ class _HomeState extends State<Home> {
             width: 450,height: 250,
             child: Row(
               children: [
-                Expanded(child: ListView(scrollDirection: Axis.horizontal,
-                  children: [
-                    Container(
-                      width: 150,
-                      height: 250,
-                      decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/sale1.png'),fit: BoxFit.cover),
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      height: 250,
-                      decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/sale2.png'),fit: BoxFit.cover),
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      height: 250,
-                      decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/sale3.png'),fit: BoxFit.cover),
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      height: 250,
-                      decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/sale1.png'),fit: BoxFit.cover),
-                      ),
-                    ),
+                Expanded(
+                  child: ListView(scrollDirection: Axis.horizontal,
+                    children: [
+                      StreamBuilder<QuerySnapshot> (
+                        stream: FirebaseFirestore.instance.collection('sales').snapshots(),
+                        builder: (context, snapshot) {
+                          if(snapshot.hasData){
+                            List<DocumentSnapshot> document=snapshot.data!.docs;
+                            return Wrap(
+                              spacing: 10,
+                              runSpacing: 10,
+                              children: List.generate(document.length, (index) {
+                                Map<String, dynamic> data = document[index].data() as Map<String, dynamic>;
 
-                  ],
-                ))
+                                String title = data['title'];
+                                int maxCharacters = 10; // Show the first 10 characters
+
+                                String shortenedTitle = title.length > maxCharacters
+                                    ? title.substring(0, maxCharacters)
+                                    : title;
+
+                                return Container(
+                                  padding: EdgeInsets.all(10),
+                                  height: 300,
+                                  width: 160,
+
+                                  child: Column(
+                                    children: [
+                                      Image.network(data['image'], scale: 5,),SizedBox(height: 5,),
+                                      Text(data['category'],style: TextStyle(fontSize: 14,color: Colors.grey),),SizedBox(height: 5,),
+                                      Text(shortenedTitle, style: TextStyle(fontSize: 18, color: Colors.black)),SizedBox(height: 5,),
+                                      Image.asset('assets/rating.png'),SizedBox(height: 5,),
+                                      Text('₹'+data['price'],style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold),)
+
+                                    ],
+                                  ),
+                                );
+                              }),
+                            );
+
+
+                          }else{
+                            return Center(child: CircularProgressIndicator());
+                          }
+                        },
+                      ),
+
+                  ],)
+                ),
               ],
 
             ),

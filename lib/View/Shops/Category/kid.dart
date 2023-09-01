@@ -43,7 +43,7 @@ class _KidState extends State<Kid> {
             },
           );
         }else{
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
       },
     );

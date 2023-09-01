@@ -8,7 +8,8 @@ class Catalogmain2 extends StatefulWidget {
  final String collection1;
   final String collection2;
   final  String  uid;
-  const Catalogmain2({Key? key, required this.collection1, required this.collection2, required this.uid}) : super(key: key);
+  final String title;
+  const Catalogmain2({Key? key, required this.collection1, required this.collection2, required this.uid, required this.title}) : super(key: key);
 
   @override
   State<Catalogmain2> createState() => _Catalogmain2State();
@@ -31,7 +32,7 @@ class _Catalogmain2State extends State<Catalogmain2> {
           leading: GestureDetector(onTap: () {
             Navigator.pop(context);
           },child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
-          title: Text("Women's Tops",style: TextStyle(color: Colors.black,)),
+          title: Text(widget.title,style: TextStyle(color: Colors.black,)),
           centerTitle: true,
           actions: [Padding(padding: EdgeInsets.all(20),child: Icon(Icons.search,color: Colors.black,),)],
           bottom:PreferredSize(
@@ -151,20 +152,25 @@ class _Catalogmain2State extends State<Catalogmain2> {
                       ? title.substring(0, maxCharacters)
                       : title;
 
-                  return Container(
-                    padding: EdgeInsets.all(10),
-                    height: 300,
-                    width: 160,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductCart(title: widget.title,collection1: widget.collection1,collection2: widget.collection2,uid1: widget.uid,uid2:document[index].id)));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      height: 300,
+                      width: 160,
 
-                    child: Column(
-                      children: [
-                        Image.network(data['image'], scale: 5,),SizedBox(height: 5,),
-                        Text(data['category'],style: TextStyle(fontSize: 14,color: Colors.grey),),SizedBox(height: 5,),
-                        Text(shortenedTitle, style: TextStyle(fontSize: 18, color: Colors.black)),SizedBox(height: 5,),
-                        Image.asset('assets/rating.png'),SizedBox(height: 5,),
-                        Text('₹'+data['price'],style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold),)
+                      child: Column(
+                        children: [
+                          Image.network(data['image'], scale: 5,),SizedBox(height: 5,),
+                          Text(data['category'],style: TextStyle(fontSize: 14,color: Colors.grey),),SizedBox(height: 5,),
+                          Text(shortenedTitle, style: TextStyle(fontSize: 18, color: Colors.black)),SizedBox(height: 5,),
+                          Image.asset('assets/rating.png'),SizedBox(height: 5,),
+                          Text('₹'+data['price'],style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold),)
 
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 }),
