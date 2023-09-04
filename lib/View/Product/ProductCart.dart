@@ -158,7 +158,7 @@ class _ProductCartState extends State<ProductCart> {
                          
                          await FirebaseFirestore.instance.
                          collection('customer').doc(customerUdi).collection('cart').
-                         add({"col1":col1,'col2':col2,'id1':id1,'productId':productId,'productSize':productSize,'productColor':productColor}).whenComplete(() => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                         add({"col1":col1,'col2':col2,'id1':id1,'productId':productId,'productSize':productSize,'productColor':productColor,'quantity':1}).whenComplete(() => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                            content: Text("Added to cart successfully "),
                          )));
                          

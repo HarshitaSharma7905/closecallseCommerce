@@ -1,3 +1,4 @@
+import 'package:closecallsecommerce/View/Catalog/Ctalogmain2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 class Men extends StatefulWidget {
@@ -26,11 +27,17 @@ class _MenState extends State<Men> {
                   child: Row(children: [
                     Expanded(
                         flex: 1,
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            data['title'],
-                            style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                Catalogmain2(collection1: 'mens',uid:documents[index].id,collection2: 'product',title: data['title'], ),));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              data['title'],
+                              style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),
+                          ),
                         )),
                     Expanded(
                         flex: 1,

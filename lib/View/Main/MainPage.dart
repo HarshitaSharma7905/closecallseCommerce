@@ -32,7 +32,7 @@ class _MainPageState extends State<MainPage> {
 
           items: [
         BottomNavigationBarItem(icon: Icon(Icons.home,),label: 'Home'),
-        BottomNavigationBarItem(icon:Icon(Icons.shopping_cart),label: 'Shop' ),
+        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),label: 'Shop' ),
         BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined,),label: 'Bag'),
         BottomNavigationBarItem(icon: Icon(Icons.favorite_border_outlined,),label: 'Favourites'),
         BottomNavigationBarItem(icon: Icon(Icons.person_rounded,),label: 'Profile'),

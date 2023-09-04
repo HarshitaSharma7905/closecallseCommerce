@@ -25,7 +25,8 @@ class _WomenState extends State<Women> {
                     Map<String,dynamic> data=documents[index].data() as Map<String,dynamic>;
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder:  (context) => Catalogmain2(title: data['title'],collection1: 'women',uid: documents[index].id,collection2: 'product',)));
+                        Navigator.push(context, MaterialPageRoute(builder:  (context) =>
+                            Catalogmain2(title: data['title'],collection1: 'women',uid: documents[index].id,collection2: 'product',)));
                       },
                       child: Container(
                         height: 100,
