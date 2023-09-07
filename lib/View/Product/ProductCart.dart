@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:closecallsecommerce/View/MyBag/MyBag.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -115,10 +113,18 @@ class _ProductCartState extends State<ProductCart> {
                      Container(
                        height: 40,width: 40,
                        child: GestureDetector(
-                           onTap: () {
-                             setState(() {
-                               _boolfav=true;
-                             });
+                           onTap: () async {
+                             SharedPreferences prefer=await SharedPreferences.getInstance();
+                             String? customerUdi=prefer.getString('uid');
+                             String col1=widget.collection1;
+                             String id1=widget.uid1;
+                             String col2=widget.collection2;
+                             String productId=snapshot.data!.id;
+                            FirebaseFirestore.instance.collection('customer').doc(customerUdi).
+                            collection('favourite').add({'col1':col1,'col2':col2,'id1':id1,'productID':productId}).whenComplete(() =>ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Added to Favourite successfully "),
+                            )) );
+
                            },
                            child: Icon(Icons.favorite_border_outlined)),
                      )
@@ -165,6 +171,17 @@ class _ProductCartState extends State<ProductCart> {
 
                          // Navigator.push(context, MaterialPageRoute(builder: (context) =>MyBag(),));
                        },child: Text('Add To Cart')),
+                     ),
+                     SizedBox(height: 20,),
+                     Container(
+                       width: 450,
+                       height: 40,
+                       child: ElevatedButton(style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.red) ,shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),onPressed: () async{
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=>MyBag()));
+
+
+                         // Navigator.push(context, MaterialPageRoute(builder: (context) =>MyBag(),));
+                       },child: Text('View Cart')),
                      )
                    ],
                  ),

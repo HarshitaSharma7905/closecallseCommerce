@@ -1,10 +1,8 @@
-import 'package:closecallsecommerce/View/Catalog/Ctalogmain2.dart';
 import 'package:closecallsecommerce/View/Search/VisualSearch.dart';
-import 'package:closecallsecommerce/View/Search/VisualSearchFinding.dart';
 import 'package:flutter/material.dart';
-
 import '../Catalog/Catalogmain.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,36 +12,48 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late String img1,img2,img3,img4,img5;
-  Future<void> fetchimage() async{
+   String img1='';
+   String img2='';
+   String img3='';
+   String img4='';
+   String img5='';
+   Future<void> fetchImages() async {
+     try {
+       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+           .collection('mainpage')
+           .doc('HFmLKrieReWpa9Hmx15L')
+           .get();
 
-  try{
-    DocumentSnapshot  documentSnapshot=await FirebaseFirestore.instance.collection('mainpage').doc('HFmLKrieReWpa9Hmx15L').get();
-    if(documentSnapshot.exists){
-      Map<String,dynamic>   images =documentSnapshot.data() as Map<String,dynamic>;
-       setState(() {
-         img1= images['img1'];
-        img2= images['img2'];
-        img3= images['img3'];
-        img4= images['img4'];
-        img5= images['img5'];
-       });
-    }
-  }catch(err){
+       if (documentSnapshot.exists) {
+         Map<String, dynamic> images =
+         documentSnapshot.data() as Map<String, dynamic>;
 
-  }
-  }
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    fetchimage();
-  }
+         setState(() {
+           img1 = images['img1'];
+           img2 = images['img2'];
+           img3 = images['img3'];
+           img4 = images['img4'];
+           img5 = images['img5'];
+         });
+       }
+     } catch (error) {
+       print("Error loading images: $error");
+     }
+   }
+
+   @override
+   void initState() {
+     super.initState();
+     fetchImages();
+   }
+
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
+
           Container(
             height: 450,
             decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(img1),fit: BoxFit.cover),

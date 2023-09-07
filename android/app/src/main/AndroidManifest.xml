@@ -3,6 +3,9 @@
         android:label="BulkMe"
         android:name="${applicationName}"
         android:icon="@drawable/logo">
+
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

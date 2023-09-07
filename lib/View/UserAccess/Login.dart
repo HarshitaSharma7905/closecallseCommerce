@@ -118,7 +118,8 @@ class _LoginState extends State<Login> {
                         //to store data locally----
                         prefs.setString('uid', uid!);
                         prefs.setBool('isLoggedIn', true);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(),));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage(),));
+
                       }else{
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text("User doesnt exist"),

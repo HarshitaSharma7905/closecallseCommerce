@@ -65,7 +65,16 @@ class _ProfileState extends State<Profile> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                Image.asset('assets/Profile/profileimg.png'),
+                GestureDetector(
+                  onTap: () {
+                    // FirebaseFirestore.instance.collection('collectionPath').doc();
+                  },
+                  child: Container(
+                    width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.black),
+                      child: Image.asset('assets/Profile/camera.png')),
+                ),
                 SizedBox(width: 10,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

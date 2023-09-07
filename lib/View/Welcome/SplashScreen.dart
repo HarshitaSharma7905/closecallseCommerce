@@ -1,6 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:closecallsecommerce/View/UserAccess/Login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Main/Home.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,11 +11,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
   late AnimationController _animationController;
-  late Timer _timer;
+  late SharedPreferences prefer;
+  bool isLoggedIn=false;
 
   @override
   void initState() {
     super.initState();
+    _getSharedPreferences();
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000), // Animation duration
@@ -23,17 +27,18 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     _animationController.forward();
 
     // Set a timer for the splash screen duration
-    _timer = Timer(Duration(seconds: 5), () {
-      // Navigate to the main screen after the timer expires
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
-    });
-  }
+    sendtonextscreen();
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    _timer.cancel();
-    super.dispose();
+
+
+
+
+
+  }
+  _getSharedPreferences() async {
+    prefer = await SharedPreferences.getInstance();
+    // Do something with prefs if needed
+    isLoggedIn=prefer.getBool('isLoggedIn')!;
   }
 
   @override
@@ -50,4 +55,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       ),
     );
   }
+  Future<void> sendtonextscreen() async{
+    await Future.delayed(Duration(seconds: 5));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>isLoggedIn?Home():Login()));
+
+  }
 }
+

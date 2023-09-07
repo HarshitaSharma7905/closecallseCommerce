@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:closecallsecommerce/View/Product/ProductCart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -138,6 +136,7 @@ class _Catalogmain2State extends State<Catalogmain2> {
           stream: FirebaseFirestore.instance.collection(widget.collection1).doc(widget.uid).collection(widget.collection2).snapshots(),
           builder: (context, snapshot) {
             if(snapshot.hasData){
+
               List<DocumentSnapshot> document=snapshot.data!.docs;
               return Wrap(
                 spacing: 10,
